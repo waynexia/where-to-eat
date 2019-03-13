@@ -1,6 +1,11 @@
 <h1 style="text-align: center">Where to eat?</h1>
 
-<body style="text-align: center">
+<script language=javascript src="dependence/jquery.js"></script>
+
+<script language=javascript src="src/init.js"></script>
+<script language=javascript src="src/generate_table.js"></script>
+
+<body style="text-align: center" onload="init();">
     <label for="select_site">select a site! </label>
     <select id="select_site" name="select_site">
         <option value="" selected>Please choose</option>
@@ -11,3 +16,4 @@
 <footer style="text-align: center">
     那就吃这一家吧!
 </footer>
+
