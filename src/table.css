@@ -6,6 +6,9 @@ table {
 td {
     padding: 0;
     border: 0;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
 }
 
 /*.empty {}*/
