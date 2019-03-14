@@ -102,8 +102,28 @@ function get_site_list(){
 }
 
 function roll_start(){
-    var times = Math.floor((Math.random() * 20) + 100);
-    for(var i = 0;i<times;i++){
-        var highlight = Math.floor(Math.random() * (selectable+1));
+    var times = Math.floor((Math.random() * 10) + 50);
+    var highlighted = 0;
+    var handle = setInterval(function(){
+        lowlight(highlighted);
+        highlighted = Math.floor(Math.random() * (selectable+1));
+        highlight(highlighted);
+    },100);
+    setTimeout(function(){
+        clearInterval(handle);
+    },times * 100);
+}
+
+function lowlight(id){
+    grid = document.getElementById(id);
+    if(grid != null){
+        grid.style = "background-color : whitesmoke";
+    }
+}
+
+function highlight(id){
+    grid = document.getElementById(id);
+    if(grid != null){
+        grid.style = "background-color : #99ff66"
     }
 }
