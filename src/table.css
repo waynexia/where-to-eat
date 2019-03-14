@@ -1,0 +1,16 @@
+table {
+    background-color: whitesmoke; 
+    padding: 0;
+}
+
+td {
+    padding: 0;
+    border: 0;
+}
+
+/*.empty {}*/
+
+.not_empty {
+    background-color: whitesmoke; 
+    border: 1px solid orangered;
+}

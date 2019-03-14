@@ -1,16 +1,24 @@
 <h1 style="text-align: center">Where to eat?</h1>
 
 <script language=javascript src="dependence/jquery.js"></script>
-
 <script language=javascript src="src/init.js"></script>
-<script language=javascript src="src/generate_table.js"></script>
+<script language=javascript src="src/utils.js"></script>
+
+<link rel="stylesheet" type="text/css"href="./src/table.css">
+<link rel="stylesheet" type="text/css"href="./src/common.css">
 
 <body style="text-align: center" onload="init();">
-    <label for="select_site">select a site! </label>
-    <select id="select_site" name="select_site">
-        <option value="" selected>Please choose</option>
-    </select>
-    <table id="map"></table>
+    <div>
+        <label for="select_site">select a site! </label>
+        <select id="select_site" name="select_site">
+            <option value="" selected>Please choose</option>
+        </select>
+        <input type="button" id="roll" class="button" value="roll" onclick="roll_start();">
+        <label for="show">Roll!</label>
+    </div>
+    <div>
+        <table id="map" align="center"></table>
+    </div>
 </body>
 
 <footer style="text-align: center">
