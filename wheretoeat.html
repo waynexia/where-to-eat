@@ -10,10 +10,9 @@
 <body style="text-align: center" onload="init();">
     <div>
         <label for="select_site">select a site! </label>
-        <select id="select_site" name="select_site">
-            <option value="" selected>Please choose</option>
+        <select id="select_site" name="select_site" onchange="generate_table();">
+            <option value="null" >Please choose</option>
         </select>
-        <!--<input type="button" id="roll" class="button" value="roll" onclick="roll_start();">-->
         <input type="button" id="roll" class="button" value="roll" onclick="roll_start()">
         <label for="roll">Roll!</label>
     </div>

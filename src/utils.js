@@ -60,6 +60,7 @@ site = example;
 var selectable = 0;
 function generate_table(){
     var map = document.getElementById("map");
+    clear_table(map);
     var length = site["length"];
     var width = site["width"];
     var id = 0;
@@ -80,25 +81,22 @@ function generate_table(){
     selectable = id;
 }
 
+function clear_table(map){
+    //twice for clear all(once sometimes will cause error)
+    for(var i=0;i<map.rows.length;i++){
+        map.deleteRow(0);
+    }
+    for(var i=0;i<map.rows.length;i++){
+        map.deleteRow(0);
+    }
+}
+
 function get_site_list(){
-    var site_dir = '';
-    var site_sel = document.getElementById("select_site");
-
-    // get auto-generated page 
-    $.ajax({url: site_dir}).then(function(html) {
-        // create temporary DOM element
-        var document = $(html);
-
-        // find all links ending with .pdf 
-        document.find('a[href$=.js]').each(function() {
-            var file_name = $(this).text();
-            var pdfUrl = $(this).attr('href');
-
-            var option = document.createElement("option");
-            option.text = file_name;
-            site_sel.add(option);
-        })
-    });
+    var site_selector = document.getElementById("select_site");
+    var option = document.createElement("option");
+    option.text = "example";
+    option.value = "example"
+    site_selector.add(option);
 }
 
 function roll_start(){
