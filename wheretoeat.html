@@ -1,6 +1,5 @@
 <h1 style="text-align: center">Where to eat?</h1>
 
-<script language=javascript src="dependence/jquery.js"></script>
 <script language=javascript src="src/init.js"></script>
 <script language=javascript src="src/utils.js"></script>
 <script language=javascript src="src/site_access.js"></script>
@@ -11,7 +10,7 @@
 <body style="text-align: center" onload="init();">
     <div>
         <label for="select_site">select a site! </label>
-        <select id="select_site" name="select_site" onchange="generate_table();">
+        <select id="select_site" name="select_site" onchange="to_generate_map(this.value);">
             <option value="null" >Please choose</option>
         </select>
         <input type="button" id="roll" class="button" value="roll" onclick="roll_start()">

@@ -1,17 +1,34 @@
 resourse_site_path = "./resourse/site/"
 
 function load_catalog(catalog){
-    //insert_js_file(resourse_site_path + "catalog.js");
-    //while(typeof catalog === 'undefined'){};
     catalog.forEach(function(item,index) {
-        console.log(typeof item);
         insert_selection(item);
     });
 }
 
-function insert_js_file(path){
-    var new_js = document.createElement("script");
-    new_js.type = "text/javascript";
-    new_js.src = path;
-    document.body.appendChild(new_js);
+function load_site(site){
+    generate_table(site);
+}
+
+function jsonp_manager(){
+    var new_js = null;
+    return function(src){
+        if(new_js != null){
+            document.body.removeChild(new_js);
+        }
+        new_js = document.createElement("script");
+        new_js.src = src;
+        document.body.appendChild(new_js);
+    }
+}
+
+var a_handle_about_upper_code = null;
+function to_generate_map(site_name){
+    var postfix = ".json?callback=load_catalog";
+    if(a_handle_about_upper_code == null){
+        a_handle_about_upper_code = jsonp_manager();
+    }
+    if(site_name != "null"){
+        a_handle_about_upper_code(resourse_site_path + site_name + postfix);
+    }
 }
