@@ -1,4 +1,4 @@
-{
+site = {
     "width": 4,
     "length": 3,
     "detail":[

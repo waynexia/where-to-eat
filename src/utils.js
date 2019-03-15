@@ -1,4 +1,4 @@
-var example = {
+/*var example = {
     "width": 4,
     "length": 3,
     "detail":[
@@ -55,7 +55,7 @@ var example = {
     ]
 }
 
-site = example;
+site = example;*/
 
 var selectable = 0;
 function generate_table(){
@@ -91,11 +91,11 @@ function clear_table(map){
     }
 }
 
-function get_site_list(){
+function insert_selection(site_name){
     var site_selector = document.getElementById("select_site");
     var option = document.createElement("option");
-    option.text = "example";
-    option.value = "example"
+    option.text = site_name;
+    option.value = site_name;
     site_selector.add(option);
 }
 

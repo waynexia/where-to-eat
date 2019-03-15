@@ -1,3 +1,3 @@
 function init(){
-    get_site_list();
+    //load_catalog();
 }
