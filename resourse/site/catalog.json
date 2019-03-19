@@ -1,4 +1,3 @@
 load_catalog([
-    "example",
-    "123"
+    "二饭三楼"
 ])
