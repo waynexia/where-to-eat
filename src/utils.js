@@ -35,8 +35,8 @@ function clear_table(map){
 function insert_selection(site_name){
     var site_selector = document.getElementById("select_site");
     var option = document.createElement("option");
-    option.text = site_name;
-    option.value = site_name;
+    option.text = site_name.display_name;
+    option.value = site_name.file_name;
     site_selector.add(option);
 }
 
