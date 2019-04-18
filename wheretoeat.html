@@ -2,13 +2,14 @@
 <h1 style="text-align: center">Where to eat?</h1>
 
 <script language=javascript src="src/init.js"></script>
-<script language=javascript src="src/utils.js"></script>
+<script language=javascript src="src/Store.js"></script>
+<script language=javascript src="src/table.js"></script>
 <script language=javascript src="src/site_access.js"></script>
 
 <link rel="stylesheet" type="text/css"href="./src/table.css">
 <link rel="stylesheet" type="text/css"href="./src/common.css">
 
-<body style="text-align: center" onload="init();">
+<body style="text-align: center">
     <div>
         <label for="select_site">select a site! </label>
         <select id="select_site" name="select_site" onchange="to_generate_map(this.value);">
