@@ -1,4 +1,27 @@
-var selectable = 0;
+var selectable = new Array();
+var tags = new Array();
+var stores = new Array();
+
+// class store
+var Store = {
+    creatNew : function(id,tag,desc){
+        var store = {};
+        store.id = id;
+        store.tag = tag;
+        store.desc = desc;
+        store.has_tag = function(single_tag){
+            for(let i in tag){
+                if(i === single_tag){
+                    return true;
+                }
+            }
+            return false;
+        }
+        return store;      
+    },
+}
+
+// generate table by using resource json
 function generate_table(site){
     var map = document.getElementById("map");
     clear_table(map);
@@ -9,17 +32,41 @@ function generate_table(site){
         var row = map.insertRow(i);
         for(var j=0;j<width;j++){
             var cell = row.insertCell(j);
+            // use "is_line_end" to avoid lots of nulllllllll
+            if(site["detail"][i][j].is_line_end === true){
+                for(;j<width;j++){
+                    cell.innerHTML = "<div class='empty'></div>";
+                }
+                continue;
+            }
             if(site["detail"][i][j].name === null){
                 cell.innerHTML = "<div class='empty'></div>";
-                
             }
             else{
                 cell.innerHTML = "<div class='not_empty' id=" +id+ ">" + site["detail"][i][j].name + "</div>";
+                add_tag(site["detail"][i][j].tag);
+                stores.push(Store.creatNew(id, site["detail"][i][j].tag, site["detail"][i][j].desc))
                 ++id;
+                selectable.push(id);
             }
         }
     }
-    selectable = id;
+}
+
+// add unique tag into tags
+function add_tag(tag){
+    for(let i in tag){
+        if(function(i){
+            for(let j of tags){
+                if(j === i){
+                    return false;
+                }
+            }
+            return true;
+        }){
+            tags.push(i);
+        }
+    }
 }
 
 function clear_table(map){
@@ -35,8 +82,8 @@ function clear_table(map){
 function insert_selection(site_name){
     var site_selector = document.getElementById("select_site");
     var option = document.createElement("option");
-    option.text = site_name;
-    option.value = site_name;
+    option.text = site_name.display_name;
+    option.value = site_name.file_name;
     site_selector.add(option);
 }
 
@@ -45,7 +92,7 @@ function roll_start(){
     var highlighted = 0;
     var handle = setInterval(function(){
         lowlight(highlighted);
-        highlighted = Math.floor(Math.random() * (selectable+1));
+        highlighted = Math.floor(Math.random() * (selectable.length + 1));
         highlight(highlighted);
     },100);
     setTimeout(function(){
