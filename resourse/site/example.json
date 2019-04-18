@@ -5,14 +5,14 @@ load_site({
         [
             {
                 "name": "A",
-                "desc": ["辣"]
+                "tag": ["辣"]
             },
             {
                 "name": null
             },
             {
                 "name": "F",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -21,25 +21,25 @@ load_site({
         [
             {
                 "name": "B",
-                "desc": []
+                "tag": []
             },
             {
                 "name": "D",
-                "desc": []
+                "tag": []
             },
             {
                 "name": "E",
-                "desc": ["大排档","油"]
+                "tag": ["大排档","油"]
             },
             {
                 "name": "G",
-                "desc": []
+                "tag": []
             }
         ],
         [
             {
                 "name": "C",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null

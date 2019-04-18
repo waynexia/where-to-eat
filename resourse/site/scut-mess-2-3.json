@@ -5,57 +5,57 @@ load_site({
         [
             {
                 "name": "茶市",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "汉堡小亨",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "营养自选",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "烧卤",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "扒饭",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "精炒",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "五谷杂粮鱼粉",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "粿条",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "烤肉闷锅",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "百年牛肉汤",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "铁板",
-                "desc":[]
+                "tag":[]
             },
             {
                 "name": "麻辣烫/麻辣香锅",
-                "desc":[]
+                "tag":[]
             }
         ],
         [
             {
                 "name": "炖汤",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -94,7 +94,7 @@ load_site({
         [
             {
                 "name": "重庆小面",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -133,7 +133,7 @@ load_site({
         [
             {
                 "name": "酸汤辣骨",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -172,7 +172,7 @@ load_site({
         [
             {
                 "name": "云吞",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -211,7 +211,7 @@ load_site({
         [
             {
                 "name": "肠粉",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -250,7 +250,7 @@ load_site({
         [
             {
                 "name": "面食",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
@@ -289,7 +289,7 @@ load_site({
         [
             {
                 "name": "笼仔",
-                "desc": []
+                "tag": []
             },
             {
                 "name": null
