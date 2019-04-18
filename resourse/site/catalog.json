@@ -1,4 +1,6 @@
 load_catalog([
-    "example",
-    "123"
+    {
+        "display_name":"二饭三楼",
+        "file_name":"scut-mess-2-3"
+    }
 ])
