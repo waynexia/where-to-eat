@@ -36,3 +36,9 @@ function add_tag(tag){
         }
     }
 }
+
+function store_clear_all(){
+    selectable = [];
+    tags = [];
+    stores = [];
+}

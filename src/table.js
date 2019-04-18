@@ -1,7 +1,10 @@
 // generate table by using resource json
 function generate_table(site){
     var map = document.getElementById("map");
+    // init
     clear_table(map);
+    store_clear_all();
+
     var length = site["length"];
     var width = site["width"];
     var id = 0;
