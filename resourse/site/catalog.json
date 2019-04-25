@@ -1,6 +1,10 @@
 load_catalog([
     {
-        "display_name":"二饭三楼",
-        "file_name":"scut-mess-2-3"
+        "display_name": "二饭三楼",
+        "file_name": "scut-mess-2-3"
+    },
+    {
+        "display_name": "穗石",
+        "file_name": "suishi"
     }
 ])

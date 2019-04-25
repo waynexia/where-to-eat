@@ -10,25 +10,66 @@ function generate_table(site){
     var id = 0;
     for(var i=0;i<length;i++){
         var row = map.insertRow(i);
+        var top_pointer = 0;
         for(var j=0;j<width;j++){
-            var cell = row.insertCell(j);
-            // use "is_line_end" to avoid lots of nulllllllll
-            if(site["detail"][i][j].is_line_end === true){
-                for(;j<width;j++){
-                    cell.innerHTML = "<div class='empty'></div>";
+            if(site["detail"][i][j] === undefined){
+                break;
+            }
+            var cell = row.insertCell(top_pointer);
+            // use "endline" to avoid lots of nulllllllll
+            /*if(site["detail"][i][j].endline != undefined){
+                if (site["detail"][i][j].endline === true){
+                    for(;j<width;j++){
+                        var cell = row.insertCell(j);
+                        cell.innerHTML = "<div class='empty'></div>";
+                    }
+                    continue;
                 }
+            }*/
+            if(site["detail"][i][j].endline != undefined){
+                j = width;
                 continue;
             }
+
             if(site["detail"][i][j].name === null){
-                cell.innerHTML = "<div class='empty'></div>";
+                // use width
+                if(site["detail"][i][j].width != undefined){
+                    skip_width = site["detail"][i][j].width
+                    for(var k = 0;k<skip_width;k++){
+                        row.insertCell(top_pointer).innerHTML = "<div class='empty'></div>";
+                        ++top_pointer;
+                    }
+                    --top_pointer;
+                }
+                else{
+                    cell.innerHTML = "<div class='empty'></div>";
+                }
             }
             else{
-                cell.innerHTML = "<div class='not_empty' id=" +id+ ">" + site["detail"][i][j].name + "</div>";
-                add_tag(site["detail"][i][j].tag);
-                stores.push(Store.creatNew(id, site["detail"][i][j].tag, site["detail"][i][j].desc))
-                ++id;
-                selectable.push(id);
+                // use width
+                if(site["detail"][i][j].width != undefined){
+                    skip_width = site["detail"][i][j].width;
+                    add_tag(site["detail"][i][j].tag);
+                    stores.push(Store.creatNew(id, site["detail"][i][j].tag, site["detail"][i][j].desc))
+                    for(var k = 0;k<skip_width;k++){
+                        cell = row.insertCell(top_pointer);
+                        cell.innerHTML = "<div class='not_empty' id=" +id+ ">" + site["detail"][i][j].name + "</div>";
+                        //row.insertCell(top_pointer).innerHTML = "<div class='empty'></div>";
+                        ++top_pointer;
+                    }
+                    ++id;
+                    --top_pointer;
+                }
+                else{
+                    cell.innerHTML = "<div class='not_empty' id=" +id+ ">" + site["detail"][i][j].name + "</div>";
+                    add_tag(site["detail"][i][j].tag);
+                    stores.push(Store.creatNew(id, site["detail"][i][j].tag, site["detail"][i][j].desc))
+                    selectable.push(id);    
+                    ++id;
+                }
+                
             }
+            ++top_pointer;
         }
     }
 }
