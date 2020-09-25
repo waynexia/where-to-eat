@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'place_detail.dart';
 import 'components.dart';
+import 'place_operation.dart';
 
 // `PlaceList` widget
 // Holds a list of `PlaceCell`
@@ -35,10 +36,12 @@ class PlaceList extends StatelessWidget {
 // `PlaceCell` contains details of a place
 final placeCell = (context) => Container(
     color: Colors.transparent,
-    margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+    margin: EdgeInsets.symmetric(
+      vertical: 5.0,
+    ),
     child: Container(
         decoration: BoxDecoration(
-            color: Colors.white54,
+            color: Colors.white10,
             borderRadius: new BorderRadius.all(
               Radius.circular(30.0),
             )),
@@ -98,12 +101,19 @@ final onTapCell = (context, index) => {
     };
 
 final onLongPressCell = (context) => {
-      showDialog(
-        context: context,
-        builder: (_) => Column(
-          children: [
-            Text("A dialog"),
-          ],
+//      showDialog(
+//        context: context,
+//        builder: (_) => Column(
+//          children: [
+//            PlaceOperation(),
+//          ],
+//        ),
+//      )
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PlaceOperation(),
         ),
       )
     };
