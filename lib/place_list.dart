@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const double placeTagRadius = 5.0;
+import 'place_detail.dart';
+import 'components.dart';
 
 // `PlaceList` widget
 // Holds a list of `PlaceCell`
@@ -9,16 +10,24 @@ class PlaceList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Place List")),
+        title: Text("Place List"),
+        centerTitle: true,
       ),
       body: Center(
-          child: Column(
-        children: <Widget>[
-          placeCell(context),
-          placeCell(context),
-          placeCell(context)
-        ],
-      )),
+        child: ListView.builder(
+            itemCount: NumTags,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: placeCell(context),
+                onLongPress: () {
+                  onLongPressCell(context);
+                },
+                onTap: () {
+                  onTapCell(context, index);
+                },
+              );
+            }),
+      ),
     );
   }
 }
@@ -35,7 +44,7 @@ final placeCell = (context) => Container(
             )),
         child: Container(
             padding:
-                const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             child: Column(
               children: [
                 // title
@@ -71,35 +80,33 @@ final placeCell = (context) => Container(
                 Row(
                   children: [
                     Icon(Icons.local_offer),
-                    placeTag("tag12"),
-                    placeTag("tag2"),
+                    TagContainer(tag: "tag12"),
+                    TagContainer(tag: "tag2"),
                   ],
                 )
               ],
             ))));
 
-// One tag
-final placeTag = (tagText) => Container(
-      padding: const EdgeInsets.all(5.0),
-      margin: const EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-        border: new Border.all(),
-        borderRadius: new BorderRadius.only(
-          topRight: Radius.zero,
-          topLeft: Radius.circular(placeTagRadius),
-          bottomLeft: Radius.circular(placeTagRadius),
-          bottomRight: Radius.circular(placeTagRadius),
+final onTapCell = (context, index) => {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              PlaceDetail(place: Place(title: index.toString())),
         ),
-      ),
-      child: Text(tagText),
-    );
+      )
+    };
 
-class PlaceTags extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView();
-  }
-}
+final onLongPressCell = (context) => {
+      showDialog(
+        context: context,
+        builder: (_) => Column(
+          children: [
+            Text("A dialog"),
+          ],
+        ),
+      )
+    };
 
 // Mock data
 class MockPlaceData {
@@ -109,4 +116,4 @@ class MockPlaceData {
   static List tags = ["tag1", "tag2"];
 }
 
-const int NumTags = 3;
+const int NumTags = 5;
