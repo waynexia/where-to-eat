@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const double placeTagRadius = 5.0;
+
 // `PlaceList` widget
 // Holds a list of `PlaceCell`
 class PlaceList extends StatelessWidget {
@@ -12,9 +14,9 @@ class PlaceList extends StatelessWidget {
       body: Center(
           child: Column(
         children: <Widget>[
-          PlaceCell,
-          PlaceCell,
-          PlaceCell
+          placeCell(context),
+          placeCell(context),
+          placeCell(context)
         ],
       )),
     );
@@ -22,33 +24,75 @@ class PlaceList extends StatelessWidget {
 }
 
 // `PlaceCell` contains details of a place
-final PlaceCell = Column(
-  children: [
-    Text(MockPlaceData.title),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Icon(Icons.place),
-        Text(MockPlaceData.place),
-        Icon(Icons.store),
-        Text(MockPlaceData.delicious_number.toString()),
-      ],
-    ),
-    Row(
-      children: [
-        Icon(Icons.local_offer),
-        PlaceTag,
-        PlaceTag,
-      ],
-    )
-  ],
-);
+final placeCell = (context) => Container(
+    color: Colors.transparent,
+    margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+    child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white54,
+            borderRadius: new BorderRadius.all(
+              Radius.circular(30.0),
+            )),
+        child: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+            child: Column(
+              children: [
+                // title
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(MockPlaceData.title,
+                      style: Theme.of(context).textTheme.headline3),
+                ),
+                // info
+                Row(
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.only(right: 50.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.place),
+                            Text(MockPlaceData.place),
+                          ],
+                        )),
+                    Container(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(Icons.store),
+                            Text(MockPlaceData.deliciousNumber.toString()),
+                          ],
+                        ))
+                  ],
+                ),
+                // tags
+                Row(
+                  children: [
+                    Icon(Icons.local_offer),
+                    placeTag("tag12"),
+                    placeTag("tag2"),
+                  ],
+                )
+              ],
+            ))));
 
-final PlaceTag = Container(
-  padding: const EdgeInsets.all(3.0),
-  decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-  child: Text("Border"),
-);
+// One tag
+final placeTag = (tagText) => Container(
+      padding: const EdgeInsets.all(5.0),
+      margin: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: new Border.all(),
+        borderRadius: new BorderRadius.only(
+          topRight: Radius.zero,
+          topLeft: Radius.circular(placeTagRadius),
+          bottomLeft: Radius.circular(placeTagRadius),
+          bottomRight: Radius.circular(placeTagRadius),
+        ),
+      ),
+      child: Text(tagText),
+    );
 
 class PlaceTags extends StatelessWidget {
   @override
@@ -61,7 +105,7 @@ class PlaceTags extends StatelessWidget {
 class MockPlaceData {
   static String title = "穗石";
   static String place = "School";
-  static int delicious_number = 23;
+  static int deliciousNumber = 23;
   static List tags = ["tag1", "tag2"];
 }
 
