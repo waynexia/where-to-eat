@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:backdrop/backdrop.dart';
 
 import 'place_detail.dart';
 import 'components.dart';
@@ -9,12 +10,16 @@ import 'place_operation.dart';
 class PlaceList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return BackdropScaffold(
+      headerHeight: MediaQuery.of(context).size.height * 0.7,
+      inactiveOverlayColor: Theme.of(context).backgroundColor,
+      inactiveOverlayOpacity: 0.5,
+      frontLayerBorderRadius: BorderRadius.zero,
+      appBar: BackdropAppBar(
         title: Text("Place List"),
         centerTitle: true,
       ),
-      body: Center(
+      frontLayer: Center(
         child: ListView.builder(
             itemCount: NumTags,
             itemBuilder: (context, index) {
@@ -29,6 +34,29 @@ class PlaceList extends StatelessWidget {
               );
             }),
       ),
+      backLayer: Container(
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          color: Theme.of(context).primaryColor,
+          alignment: Alignment.topCenter,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Icon(Icons.info_outline, size: 50),
+              ),
+              Container(
+//            flex:20,
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Transform.rotate(
+                    angle: -0.25 * 3.14,
+                    child: Icon(Icons.local_dining, size: 100)),
+              ),
+              Expanded(
+                child: Icon(Icons.settings, size: 50),
+              )
+            ],
+          )),
     );
   }
 }
