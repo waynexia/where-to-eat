@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'components.dart';
 
 class PlaceDetail extends StatelessWidget {
-  final Place place;
+  final MockPlace place;
 
   PlaceDetail({Key key, @required this.place}) : super(key: key);
 
@@ -70,8 +70,8 @@ class PlaceDetail extends StatelessWidget {
   }
 }
 
-class Place {
+class MockPlace {
   final String title;
 
-  Place({@required this.title});
+  MockPlace({@required this.title});
 }

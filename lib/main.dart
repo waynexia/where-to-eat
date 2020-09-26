@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 import 'place_list.dart';
+import 'model.dart';
 
 void main() {
   runApp(MyApp());
@@ -109,11 +114,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             RaisedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PlaceList()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Index()));
               },
               child: Text("Open place list"),
-            )
+            ),
+            RaisedButton(
+              onPressed: prepareMockData,
+              child: Text("prepare mock data"),
+            ),
           ],
         ),
       ),
@@ -124,4 +133,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+prepareMockData() async {
+  Place mockPlace =
+      Place(title: "A street", location: "Somewhere", tags: [], delicious: []);
+  final String json = jsonEncode(mockPlace.toJson());
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("0", json);
 }
