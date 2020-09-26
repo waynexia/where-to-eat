@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-const double tagRadius = 5.0;
+import 'model.dart';
 
-class TagContainer extends Container {
-  TagContainer({Key key, @required String tag})
+const double tagRadius = 10.0;
+
+class TagBox extends Container {
+  TagBox({Key key, @required Tag tag})
       : super(
           padding: const EdgeInsets.all(5.0),
           margin: const EdgeInsets.all(5.0),
@@ -16,6 +18,28 @@ class TagContainer extends Container {
               bottomRight: Radius.circular(tagRadius),
             ),
           ),
-          child: Text(tag),
+          child: Text(tag.text),
         );
+}
+
+class TagContainer extends StatelessWidget {
+  @required
+  final List<Tag> tags;
+
+  TagContainer({Key key, this.tags})
+      : super(
+          key: key,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> children = [];
+    for (Tag tag in tags) {
+      children.add(TagBox(tag: tag));
+    }
+
+    return Wrap(
+      children: children,
+    );
+  }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'components.dart';
+import 'model.dart';
 
 class PlaceDetail extends StatelessWidget {
-  final MockPlace place;
+  final Place place;
 
   PlaceDetail({Key key, @required this.place}) : super(key: key);
 
@@ -41,30 +42,20 @@ class PlaceDetail extends StatelessWidget {
               )),
         ]),
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-          decoration: BoxDecoration(
-            border: new Border.all(),
-            borderRadius: new BorderRadius.all(
-              Radius.circular(10),
-            ),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          alignment: Alignment.centerLeft,
+//          constraints: BoxConstraints.tightForFinite(),
+//          decoration: BoxDecoration(
+//            border: new Border.all(),
+//            borderRadius: new BorderRadius.all(
+//              Radius.circular(10),
+//            ),
+//          ),
+          child: TagContainer(
+            tags: place.tags,
           ),
-          child: Wrap(
-            children: [
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "1123asdfsdfsd1"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "1123asdasd1"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "11231"),
-              TagContainer(tag: "11231sdd"),
-              TagContainer(tag: "11231"),
-            ],
-          ),
-        )
+        ),
+        Divider(),
       ]),
     );
   }

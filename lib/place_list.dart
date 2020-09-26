@@ -140,8 +140,9 @@ final placeCell = (context, PlaceAbstract place) => Container(
                 Row(
                   children: [
                     Icon(Icons.local_offer),
-                    TagContainer(tag: "tag12"),
-                    TagContainer(tag: "tag2"),
+                    TagContainer(
+                      tags: place.tags,
+                    ),
                   ],
                 )
               ],
@@ -151,8 +152,7 @@ final onTapCell = (context, index) => {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              PlaceDetail(place: MockPlace(title: index.toString())),
+          builder: (context) => PlaceDetail(place: model.places[index]),
         ),
       )
     };
@@ -192,7 +192,7 @@ class PlaceAbstract {
   final String title;
   final String location;
   final int numDelicious;
-  final List<String> tags;
+  final List<model.Tag> tags;
 
   PlaceAbstract({this.title, this.location, this.numDelicious, this.tags});
 
@@ -201,15 +201,11 @@ class PlaceAbstract {
     List<PlaceAbstract> abstracts = [];
 
     for (final place in model.places) {
-      List<String> tags = [];
-      for (final complexTag in place.tags) {
-        tags.add(complexTag.text);
-      }
       PlaceAbstract abstract = new PlaceAbstract(
           title: place.title,
           location: place.location,
           numDelicious: place.delicious.length,
-          tags: tags);
+          tags: place.tags);
       abstracts.add(abstract);
     }
 
