@@ -42,12 +42,21 @@ class Place {
 @JsonSerializable()
 class Delicious {
   final String name;
-  final List<int> tagIndex;
+  final List<Tag> tags;
 
-  Delicious({this.name, this.tagIndex});
+  Delicious({this.name, this.tags});
   factory Delicious.fromJson(Map<String, dynamic> json) =>
       _$DeliciousFromJson(json);
   Map<String, dynamic> toJson() => _$DeliciousToJson(this);
+
+  bool containsTag(String tag) {
+    for (var t in tags) {
+      if (tag == t.text) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 @JsonSerializable()

@@ -8,7 +8,4 @@ final List<String> reroll = [
   "怎么总是这个",
 ];
 
-final List<String> greeting = [
-  "晚上吃啥",
-  "好耶 又要吃饭了"
-];
+final List<String> greeting = ["晚上吃啥", "好耶 又要吃饭了"];

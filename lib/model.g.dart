@@ -30,13 +30,15 @@ Map<String, dynamic> _$PlaceToJson(Place instance) => <String, dynamic>{
 Delicious _$DeliciousFromJson(Map<String, dynamic> json) {
   return Delicious(
     name: json['name'] as String,
-    tagIndex: (json['tagIndex'] as List)?.map((e) => e as int)?.toList(),
+    tags: (json['tags'] as List)
+        ?.map((e) => e == null ? null : Tag.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
 Map<String, dynamic> _$DeliciousToJson(Delicious instance) => <String, dynamic>{
       'name': instance.name,
-      'tagIndex': instance.tagIndex,
+      'tags': instance.tags,
     };
 
 Tag _$TagFromJson(Map<String, dynamic> json) {
