@@ -59,6 +59,10 @@ class _EditDeliciousState extends State<EditDelicious> {
 
   @override
   Widget build(BuildContext context) {
+
+    tagFieldController = TextEditingController(text: widget.delicious.name);
+    nameFieldController = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Edit Delicious"),
@@ -77,7 +81,6 @@ class _EditDeliciousState extends State<EditDelicious> {
                 TextWithIcon(
                   icon: Icons.restaurant,
                   label: "Name",
-                  content: widget.delicious.name,
                   controller: nameFieldController,
                 ),
                 Divider(),

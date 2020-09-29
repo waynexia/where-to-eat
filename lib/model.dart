@@ -12,10 +12,10 @@ List<Place> places = [];
 // Serialize model start
 @JsonSerializable(explicitToJson: true)
 class Place {
-  final String title;
-  final String location;
-  final Map<String, int> tags;
-  final List<Delicious> delicious;
+  String title;
+  String location;
+  Map<String, int> tags;
+  List<Delicious> delicious;
 
   Place({this.title, this.location, this.tags, this.delicious});
   factory Place.fromJson(Map<String, dynamic> json) => _$PlaceFromJson(json);

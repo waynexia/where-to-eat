@@ -1,17 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:where_to_eat/model.dart';
+import 'add_place.dart';
 
 import 'place_list.dart';
 
-const double menuRadius = 30;
+const double menuRadius = 70;
 const double iconSize = 130;
 
 class PlaceOperation extends StatelessWidget {
   @required
-  final PlaceAbstract place;
+  final Place place;
+  PlaceAbstract placeAbstract;
 
-  PlaceOperation({Key key, this.place}) : super(key: key);
+  PlaceOperation({Key key, this.place,this.placeAbstract }) : super(key: key){
+    this.placeAbstract = PlaceAbstract.from(place);
+  }
+
+  onEditPlace(context) async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EditPlace(place: place)));
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +37,7 @@ class PlaceOperation extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
-              child: placeCell(context, place),
+              child: placeCell(context, placeAbstract),
             ),
             Container(
 //                height: double.infinity,
@@ -36,6 +48,7 @@ class PlaceOperation extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      alignment: Alignment.topLeft,
                       margin:
                           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
                       decoration: BoxDecoration(
@@ -48,7 +61,12 @@ class PlaceOperation extends StatelessWidget {
                           bottomRight: Radius.zero,
                         ),
                       ),
-                      child: Icon(Icons.edit, size: iconSize),
+                      child: InkWell(
+                        child: Icon(Icons.edit, size: iconSize),
+                        onTap: () {
+                          onEditPlace(context);
+                        },
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(

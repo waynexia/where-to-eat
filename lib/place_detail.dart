@@ -163,7 +163,6 @@ class _ResultContainerState extends State<ResultContainer> {
     setState(() {
       status = ResultContainerStatus.Rolling;
     });
-    print(widget.selectedTags);
   }
 
   void pickResult() {

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:backdrop/backdrop.dart';
@@ -10,8 +12,21 @@ import 'place_operation.dart';
 import 'model.dart' as model;
 import 'add_place.dart';
 
-class Index extends StatelessWidget {
-  final GlobalKey<_PlaceListState> playListKey = GlobalKey();
+class Index extends StatefulWidget {
+  _IndexState createState() => _IndexState();
+}
+
+class _IndexState extends State<Index> {
+  onTapAdd() async {
+    final model.Place newPlace = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                EditPlace(place: model.Place.defaultValue())));
+    if (newPlace != null) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +55,11 @@ class Index extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: InkWell(
                     onTap: () {
-                      onTapAdd(context, playListKey);
+                      onTapAdd();
                     },
                     child: Transform.rotate(
                         // contra-rotate 45°
-                        angle: -0.25 * 3.14,
+                        angle: -0.25 * pi,
                         child: Icon(Icons.local_dining, size: 100)),
                   )),
               Expanded(
@@ -52,6 +67,17 @@ class Index extends StatelessWidget {
               )
             ],
           )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: onTapAdd,
+        tooltip: 'Add new place',
+        backgroundColor: Theme.of(context).buttonColor,
+        child: Transform.rotate(
+            angle: -0.25 * pi,
+            child: Icon(
+              Icons.local_dining,
+              color: Colors.white,
+            )),
+      ),
     );
   }
 }
@@ -64,10 +90,6 @@ class PlaceList extends StatefulWidget {
 }
 
 class _PlaceListState extends State<PlaceList> {
-  reload() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -81,7 +103,7 @@ class _PlaceListState extends State<PlaceList> {
                   return ListTile(
                     title: placeCell(context, places[index]),
                     onLongPress: () {
-                      onLongPressCell(context, places[index]);
+                      onLongPressCell(context, model.places[index]);
                     },
                     onTap: () {
                       onTapCell(context, index);
@@ -169,7 +191,7 @@ final onTapCell = (context, index) => {
       )
     };
 
-final onLongPressCell = (context, PlaceAbstract place) => {
+final onLongPressCell = (context, model.Place place) => {
 //      showDialog(
 //        context: context,
 //        builder: (_) => Column(
@@ -188,15 +210,6 @@ final onLongPressCell = (context, PlaceAbstract place) => {
         ),
       )
     };
-
-onTapAdd(context, key) async {
-  final model.Place newPlace = await Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => EditPlace(place: model.Place.defaultValue())));
-  model.places.add(newPlace);
-  key.currentState.reload();
-}
 
 // Mock data
 class MockPlaceData {
@@ -232,5 +245,13 @@ class PlaceAbstract {
     }
 
     return abstracts;
+  }
+
+  static PlaceAbstract from(model.Place place) {
+    return PlaceAbstract(
+        title: place.title,
+        location: place.location,
+        numDelicious: place.delicious.length,
+        tags: place.tags);
   }
 }

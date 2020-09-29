@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:where_to_eat/components.dart';
 import 'package:where_to_eat/edit_delicious.dart';
 
@@ -13,15 +16,31 @@ class EditPlace extends StatefulWidget {
 }
 
 class _EditPlaceState extends State<EditPlace> {
+  TextEditingController placeFieldController ;
+  TextEditingController locationFieldController;
+
+  finishEditing() async {
+    widget.place.title = placeFieldController.text;
+    widget.place.location = locationFieldController.text;
+
+    final String json = jsonEncode(widget.place.toJson());
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(widget.place.title + widget.place.location, json);
+
+    Navigator.pop(context,widget.place);
+  }
+
   @override
   Widget build(BuildContext context) {
+    placeFieldController = new TextEditingController(text: widget.place.title);
+    locationFieldController = new TextEditingController(text: widget.place.location);
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Edit Place"),
           actions: [
             InkWell(
-              // todo: finish save() method
-              onTap: () {},
+              onTap: finishEditing,
               child: Icon(Icons.check),
             )
           ],
@@ -34,12 +53,12 @@ class _EditPlaceState extends State<EditPlace> {
               TextWithIcon(
                 icon: Icons.restaurant,
                 label: "Place",
-                content: widget.place.title,
+                controller: placeFieldController,
               ),
               TextWithIcon(
                 icon: Icons.place,
                 label: "Location",
-                content: widget.place.location,
+                controller: locationFieldController,
               ),
               Row(
                 children: [
@@ -47,7 +66,7 @@ class _EditPlaceState extends State<EditPlace> {
                   VerticalDivider(),
                   TagContainer(
 //                    tags: place.tags,
-                    tags: {},
+                    tags: widget.place.tags,
                   ),
                 ],
               ),
@@ -61,10 +80,12 @@ class _EditPlaceState extends State<EditPlace> {
                   RaisedButton(
                     onPressed: () {
                       Delicious delicious = Delicious.defaultValue();
-                      onTapDelicious(context, delicious, widget.place)
+                      onAddDelicious(context, delicious, widget.place)
                           .then((value) {
-                        widget.place.delicious.add(delicious);
-                        setState(() {});
+                        if (value != null) {
+                          widget.place.delicious.add(delicious);
+                          setState(() {});
+                        }
                       });
                     },
                     child: Text("Add"),
@@ -93,10 +114,9 @@ class _EditPlaceState extends State<EditPlace> {
 class TextWithIcon extends StatelessWidget {
   final IconData icon;
   final String label;
-  final String content;
   final TextEditingController controller;
 
-  TextWithIcon({Key key, this.icon, this.label, this.content, this.controller})
+  TextWithIcon({Key key, this.icon, this.label, this.controller})
       : super(key: key);
 
   @override
@@ -107,7 +127,6 @@ class TextWithIcon extends StatelessWidget {
       // todo: fix continueAction
 //      textInputAction: TextInputAction.continueAction,
       textInputAction: TextInputAction.done,
-      initialValue: content,
       decoration: InputDecoration(
         icon: Icon(icon),
         labelText: label,
@@ -120,7 +139,7 @@ class TextWithIcon extends StatelessWidget {
   }
 }
 
-Future<Delicious> onTapDelicious(
+Future<Delicious> onAddDelicious(
     context, Delicious delicious, Place place) async {
   Delicious newDelicious = await Navigator.push(
       context,
@@ -129,6 +148,16 @@ Future<Delicious> onTapDelicious(
                 delicious: delicious,
                 place: place,
               )));
+
+  if (newDelicious != null) {
+    for (var tag in newDelicious.tags.keys) {
+      if (place.tags.containsKey(tag)) {
+        place.tags.update(tag, (value) => value + 1);
+      } else {
+        place.tags.addAll({tag: 1});
+      }
+    }
+  }
 
   return newDelicious;
 }
