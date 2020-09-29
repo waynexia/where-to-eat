@@ -1,9 +1,8 @@
 # where-to-eat
-roll a place to eat
-
-live demo: [where-to-eat](http://cloud.waynest.com/starry/where-to-eat/)
+Answer the ultimate question, Where To Eat
 
 # known bugs:
-- [ ] 更换地图时有残留
-- [ ] 宽度不为一的店子不能同时点亮
-- [ ] 长宽不一致（
+- [ ] 输入框重绘时不会刷新
+- [ ] 完成编辑按钮位置太偏
+- [ ] tag 过多显示溢出
+- [ ] 修改 Delicious 未完成
