@@ -121,7 +121,7 @@ class ResultContainer extends StatefulWidget {
 
     for (var delicious in place.delicious) {
       for (var tag in selectedTags) {
-        if (delicious.containsTag(tag)) {
+        if (delicious.tags.containsKey(tag)) {
           candidates.add(delicious.name);
           break;
         }

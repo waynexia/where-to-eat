@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:where_to_eat/add_place.dart';
 
 import 'place_detail.dart';
 import 'components.dart';
 import 'place_operation.dart';
 import 'model.dart' as model;
+import 'add_place.dart';
 
 class Index extends StatelessWidget {
+  final GlobalKey<_PlaceListState> playListKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
@@ -33,12 +37,16 @@ class Index extends StatelessWidget {
                 child: Icon(Icons.info_outline, size: 50),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Transform.rotate(
-                    // contra-rotate 45°
-                    angle: -0.25 * 3.14,
-                    child: Icon(Icons.local_dining, size: 100)),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  child: InkWell(
+                    onTap: () {
+                      onTapAdd(context, playListKey);
+                    },
+                    child: Transform.rotate(
+                        // contra-rotate 45°
+                        angle: -0.25 * 3.14,
+                        child: Icon(Icons.local_dining, size: 100)),
+                  )),
               Expanded(
                 child: Icon(Icons.settings, size: 50),
               )
@@ -56,6 +64,10 @@ class PlaceList extends StatefulWidget {
 }
 
 class _PlaceListState extends State<PlaceList> {
+  reload() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -177,6 +189,15 @@ final onLongPressCell = (context, PlaceAbstract place) => {
       )
     };
 
+onTapAdd(context, key) async {
+  final model.Place newPlace = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => EditPlace(place: model.Place.defaultValue())));
+  model.places.add(newPlace);
+  key.currentState.reload();
+}
+
 // Mock data
 class MockPlaceData {
   static String title = "穗石";
@@ -188,11 +209,12 @@ class MockPlaceData {
 const int NumTags = 5;
 
 // Utils
+// todo: rename this
 class PlaceAbstract {
   final String title;
   final String location;
   final int numDelicious;
-  final List<model.Tag> tags;
+  final Map<String, int> tags;
 
   PlaceAbstract({this.title, this.location, this.numDelicious, this.tags});
 

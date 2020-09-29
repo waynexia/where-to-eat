@@ -136,11 +136,11 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 prepareMockData() async {
-  Place mockPlace = Place(title: "A street", location: "Somewhere", tags: [
-    Tag(text: "tag1", counter: 0),
-    Tag(text: "tag2", counter: 1),
-    Tag(text: "tag3", counter: 2)
-  ], delicious: []);
+  Place mockPlace = Place(
+      title: "A street",
+      location: "Somewhere",
+      tags: {"tag1": 1, "tag2": 2, "tag3": 3},
+      delicious: []);
   final String json = jsonEncode(mockPlace.toJson());
 
   SharedPreferences prefs = await SharedPreferences.getInstance();

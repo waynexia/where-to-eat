@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -12,7 +14,7 @@ List<Place> places = [];
 class Place {
   final String title;
   final String location;
-  final List<Tag> tags;
+  final Map<String, int> tags;
   final List<Delicious> delicious;
 
   Place({this.title, this.location, this.tags, this.delicious});
@@ -37,35 +39,24 @@ class Place {
 
     return;
   }
+
+  static Place defaultValue() {
+    return Place(tags: {}, delicious: []);
+  }
 }
 
 @JsonSerializable()
 class Delicious {
-  final String name;
-  final List<Tag> tags;
+  String name;
+  Map<String, int> tags;
 
   Delicious({this.name, this.tags});
   factory Delicious.fromJson(Map<String, dynamic> json) =>
       _$DeliciousFromJson(json);
   Map<String, dynamic> toJson() => _$DeliciousToJson(this);
 
-  bool containsTag(String tag) {
-    for (var t in tags) {
-      if (tag == t.text) {
-        return true;
-      }
-    }
-    return false;
+  static Delicious defaultValue() {
+    return Delicious(tags: {});
   }
-}
-
-@JsonSerializable()
-class Tag {
-  final String text;
-  final int counter;
-
-  Tag({this.text, this.counter});
-  factory Tag.fromJson(Map<String, dynamic> json) => _$TagFromJson(json);
-  Map<String, dynamic> toJson() => _$TagToJson(this);
 }
 // Serialize model end

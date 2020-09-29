@@ -7,9 +7,12 @@ const double tagRadius = 10.0;
 class TagBox extends StatefulWidget {
   final void Function(String) onTap;
   @required
-  final Tag tag;
+  final String tag;
+  @required
+  final int count;
+  final bool shouldDisplayCount;
 
-  TagBox({Key key, this.onTap, this.tag});
+  TagBox({Key key, this.onTap, this.tag, this.count, this.shouldDisplayCount});
 
   _TagBoxState createState() => _TagBoxState();
 }
@@ -21,7 +24,7 @@ class _TagBoxState extends State<TagBox> {
 //  _TagBoxState({Key key, this.isSelected, @required this.isTouchable}): super();
 
   onTap() {
-    widget.onTap(widget.tag.text);
+    widget.onTap(widget.tag);
 
     setState(() {
       this.isSelected = !this.isSelected;
@@ -46,7 +49,7 @@ class _TagBoxState extends State<TagBox> {
             bottomRight: Radius.circular(tagRadius),
           ),
         ),
-        child: Text(widget.tag.text),
+        child: Text(widget.tag),
       ),
     );
   }
@@ -54,10 +57,12 @@ class _TagBoxState extends State<TagBox> {
 
 class TagContainer extends StatelessWidget {
   @required
-  final List<Tag> tags;
+  final Map<String, int> tags;
   void Function(String) onTap;
+  final bool shouldDisplayCount;
 
-  TagContainer({Key key, this.tags, this.onTap})
+  TagContainer(
+      {Key key, this.tags, this.onTap, this.shouldDisplayCount = false})
       : super(
           key: key,
         );
@@ -65,12 +70,14 @@ class TagContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
-    for (Tag tag in tags) {
+    tags.forEach((tag, count) {
       children.add(TagBox(
+        onTap: onTap,
         tag: tag,
-        onTap: this.onTap,
+        count: count,
+        shouldDisplayCount: shouldDisplayCount,
       ));
-    }
+    });
 
     return Wrap(
       children: children,
