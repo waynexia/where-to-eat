@@ -13,15 +13,13 @@ class PlaceOperation extends StatelessWidget {
   final Place place;
   PlaceAbstract placeAbstract;
 
-  PlaceOperation({Key key, this.place,this.placeAbstract }) : super(key: key){
+  PlaceOperation({Key key, this.place, this.placeAbstract}) : super(key: key) {
     this.placeAbstract = PlaceAbstract.from(place);
   }
 
   onEditPlace(context) async {
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => EditPlace(place: place)));
+    await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => EditPlace(place: place)));
     Navigator.pop(context);
   }
 
@@ -87,7 +85,7 @@ class PlaceOperation extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      margin: EdgeInsets.symmetric(horizontal: 1),
                       decoration: BoxDecoration(
                         color: Colors.white10,
                         border: new Border.all(),

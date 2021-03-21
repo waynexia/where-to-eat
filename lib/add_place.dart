@@ -16,7 +16,7 @@ class EditPlace extends StatefulWidget {
 }
 
 class _EditPlaceState extends State<EditPlace> {
-  TextEditingController placeFieldController ;
+  TextEditingController placeFieldController;
   TextEditingController locationFieldController;
 
   finishEditing() async {
@@ -27,13 +27,14 @@ class _EditPlaceState extends State<EditPlace> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(widget.place.title + widget.place.location, json);
 
-    Navigator.pop(context,widget.place);
+    Navigator.pop(context, widget.place);
   }
 
   @override
   Widget build(BuildContext context) {
     placeFieldController = new TextEditingController(text: widget.place.title);
-    locationFieldController = new TextEditingController(text: widget.place.location);
+    locationFieldController =
+        new TextEditingController(text: widget.place.location);
 
     return Scaffold(
         appBar: AppBar(
@@ -80,7 +81,7 @@ class _EditPlaceState extends State<EditPlace> {
                   RaisedButton(
                     onPressed: () {
                       Delicious delicious = Delicious.defaultValue();
-                      onAddDelicious(context, delicious, widget.place)
+                      onEditDelicious(context, delicious, widget.place)
                           .then((value) {
                         if (value != null) {
                           widget.place.delicious.add(delicious);
@@ -102,6 +103,16 @@ class _EditPlaceState extends State<EditPlace> {
                     subtitle: Row(
                       children: [Text("tag1"), Text("Tag2")],
                     ),
+                    onTap: () {
+                      Delicious delicious = widget.place.delicious[index];
+                      onEditDelicious(context, delicious, widget.place)
+                          .then((value) {
+                        if (value != null) {
+                          widget.place.delicious[index] = delicious;
+                          setState(() {});
+                        }
+                      });
+                    },
                   );
                 },
               ))
@@ -139,7 +150,7 @@ class TextWithIcon extends StatelessWidget {
   }
 }
 
-Future<Delicious> onAddDelicious(
+Future<Delicious> onEditDelicious(
     context, Delicious delicious, Place place) async {
   Delicious newDelicious = await Navigator.push(
       context,

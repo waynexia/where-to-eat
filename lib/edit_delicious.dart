@@ -59,7 +59,6 @@ class _EditDeliciousState extends State<EditDelicious> {
 
   @override
   Widget build(BuildContext context) {
-
     tagFieldController = TextEditingController(text: widget.delicious.name);
     nameFieldController = TextEditingController();
 
