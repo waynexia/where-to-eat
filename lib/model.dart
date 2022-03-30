@@ -24,11 +24,11 @@ class Place {
   /// Called on start. Load all data from shared_preference to global variable
   /// `places`.
   static initFromStorage() async {
-    if (places.length != 0) {
-      return;
-    }
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (places.length != 0) {
+      places.clear();
+    }
     final keys = prefs.getKeys();
 
     for (String key in keys) {

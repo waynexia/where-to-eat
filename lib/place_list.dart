@@ -1,6 +1,6 @@
 import 'dart:math';
+import 'dart:developer' as developer;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -103,7 +103,16 @@ class _PlaceListState extends State<PlaceList> {
                   return ListTile(
                     title: placeCell(context, places[index]),
                     onLongPress: () {
-                      onLongPressCell(context, model.places[index]);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PlaceOperation(
+                            place: model.places[index],
+                          ),
+                        ),
+                      ).then((_) =>{
+                        setState(() { })
+                      });
                     },
                     onTap: () {
                       onTapCell(context, index);
@@ -191,25 +200,6 @@ final onTapCell = (context, index) => {
       )
     };
 
-final onLongPressCell = (context, model.Place place) => {
-//      showDialog(
-//        context: context,
-//        builder: (_) => Column(
-//          children: [
-//            PlaceOperation(),
-//          ],
-//        ),
-//      )
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PlaceOperation(
-            place: place,
-          ),
-        ),
-      )
-    };
 
 // Mock data
 class MockPlaceData {
@@ -244,6 +234,7 @@ class PlaceAbstract {
       abstracts.add(abstract);
     }
 
+    developer.log("Places reloaded");
     return abstracts;
   }
 

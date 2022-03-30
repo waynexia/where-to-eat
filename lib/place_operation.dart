@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:where_to_eat/model.dart';
 import 'add_place.dart';
 
@@ -20,6 +22,13 @@ class PlaceOperation extends StatelessWidget {
   onEditPlace(context) async {
     await Navigator.push(context,
         MaterialPageRoute(builder: (context) => EditPlace(place: place)));
+    Navigator.pop(context);
+  }
+
+  onDeletePlace(context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    developer.log("Removing place "+place.title);
+    await prefs.remove(place.title);
     Navigator.pop(context);
   }
 
@@ -85,19 +94,23 @@ class PlaceOperation extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        color: Colors.white10,
-                        border: new Border.all(),
-                        borderRadius: new BorderRadius.only(
-                          topRight: Radius.zero,
-                          topLeft: Radius.circular(menuRadius),
-                          bottomLeft: Radius.circular(menuRadius),
-                          bottomRight: Radius.circular(menuRadius),
+                        margin: EdgeInsets.symmetric(horizontal: 1),
+                        decoration: BoxDecoration(
+                          color: Colors.white10,
+                          border: new Border.all(),
+                          borderRadius: new BorderRadius.only(
+                            topRight: Radius.zero,
+                            topLeft: Radius.circular(menuRadius),
+                            bottomLeft: Radius.circular(menuRadius),
+                            bottomRight: Radius.circular(menuRadius),
+                          ),
                         ),
-                      ),
-                      child: Icon(Icons.delete_forever, size: iconSize),
-                    ),
+                        child: InkWell(
+                          child: Icon(Icons.delete_forever, size: iconSize),
+                          onTap: () {
+                            onDeletePlace(context);
+                          },
+                        )),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white10,
