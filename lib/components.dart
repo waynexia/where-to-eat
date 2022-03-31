@@ -84,3 +84,48 @@ class TagContainer extends StatelessWidget {
     );
   }
 }
+
+/// A customized [ToggleButtons] that only contains two sub-widget.
+class FlatSwitchButton extends StatefulWidget{
+  @required
+  final Widget left;
+  @required
+  final Widget right;
+  bool isLeftSelected = true;
+  final void Function(bool) onTap;
+
+  /// A customized [ToggleButtons] that only contains two sub-widget.
+  FlatSwitchButton({Key key,  this.left, this.right, this.onTap, });
+
+  _FlatSwitchButtonState createState() => _FlatSwitchButtonState();
+}
+
+class _FlatSwitchButtonState extends State<FlatSwitchButton>{
+  @override
+  Widget build(BuildContext context) {
+    return  ToggleButtons(
+      children: <Widget>[
+        Container(child: widget.left, margin: const EdgeInsets.all(5.0)),
+        Container(child: widget.right, margin: const EdgeInsets.all(5.0)),
+      ],
+      onPressed: (int index) {
+        setState(() {
+          if (index == 0) {
+            widget.isLeftSelected = true;
+          } else {
+            widget.isLeftSelected = false;
+          }
+        });
+        widget.onTap(widget.isLeftSelected);
+      },
+      isSelected: [widget.isLeftSelected, !widget.isLeftSelected],
+
+      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+      splashColor: Colors.transparent,
+      fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+      selectedColor: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.primary,
+      // highlightColor: Colors.transparent,
+    );
+  }
+}

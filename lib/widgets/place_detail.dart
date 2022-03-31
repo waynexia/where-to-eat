@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:math';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -36,7 +37,7 @@ class PlaceDetail extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2,
             textAlign: TextAlign.left),
         Divider(),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Container(
             alignment: Alignment.centerLeft,
             margin: const EdgeInsets.all(10.0),
@@ -45,27 +46,13 @@ class PlaceDetail extends StatelessWidget {
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
-          Container(
-              alignment: Alignment.centerRight,
-              margin: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RaisedButton(
-                    child: Text("想吃..."),
-                    onPressed: () {
-                      this.isSelectedTagsWanted = true;
-                    },
-                  ),
-                  VerticalDivider(),
-                  RaisedButton(
-                    child: Text("不要..."),
-                    onPressed: () {
-                      this.isSelectedTagsWanted = false;
-                    },
-                  ),
-                ],
-              )),
+          FlatSwitchButton(
+            left: Text("想吃...",textScaleFactor:1.2),
+            right: Text("不要...",textScaleFactor:1.2),
+            onTap: (bool isLeftSelected){
+              isSelectedTagsWanted = isLeftSelected;
+            }
+          )
         ]),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
