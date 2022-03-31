@@ -2,7 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:where_to_eat/model.dart';
+import 'package:where_to_eat/models/place.dart';
 import 'add_place.dart';
 
 import 'place_list.dart';

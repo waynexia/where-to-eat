@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:where_to_eat/components.dart';
 
-import 'model.dart';
+import 'package:where_to_eat/models/place.dart';
 import 'add_place.dart';
 
 class EditDelicious extends StatefulWidget {

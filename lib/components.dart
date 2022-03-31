@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'model.dart';
+import 'models/place.dart';
 
 const double tagRadius = 10.0;
 

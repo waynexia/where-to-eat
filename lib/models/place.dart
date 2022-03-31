@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-part 'model.g.dart';
+part 'place.g.dart';
 
 // Global data
 List<Place> places = [];

@@ -4,12 +4,12 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:where_to_eat/add_place.dart';
+import 'package:where_to_eat/widgets/add_place.dart';
 
 import 'place_detail.dart';
-import 'components.dart';
+import 'package:where_to_eat/components.dart';
 import 'place_operation.dart';
-import 'model.dart' as model;
+import 'package:where_to_eat/models/place.dart' as model;
 import 'add_place.dart';
 
 class Index extends StatefulWidget {

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'place_list.dart';
-import 'model.dart';
+import 'widgets/place_list.dart';
+import 'models/place.dart';
 
 void main() {
   runApp(MyApp());

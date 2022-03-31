@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:where_to_eat/components.dart';
-import 'package:where_to_eat/edit_delicious.dart';
+import 'package:where_to_eat/widgets/edit_delicious.dart';
 
-import 'model.dart';
+import 'package:where_to_eat/models/place.dart';
 
 class EditPlace extends StatefulWidget {
   Place place;

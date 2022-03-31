@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:where_to_eat/place_list.dart';
+import 'package:where_to_eat/widgets/place_list.dart';
 
-import 'components.dart';
-import 'model.dart';
+import 'package:where_to_eat/components.dart';
+import 'package:where_to_eat/models/place.dart';
 
 //ignore: must_be_immutable
 class PlaceDetail extends StatelessWidget {
