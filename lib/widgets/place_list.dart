@@ -110,9 +110,7 @@ class _PlaceListState extends State<PlaceList> {
                             place: model.places[index],
                           ),
                         ),
-                      ).then((_) =>{
-                        setState(() { })
-                      });
+                      ).then((_) => {setState(() {})});
                     },
                     onTap: () {
                       onTapCell(context, index);
@@ -199,7 +197,6 @@ final onTapCell = (context, index) => {
         ),
       )
     };
-
 
 // Mock data
 class MockPlaceData {

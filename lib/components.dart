@@ -86,7 +86,7 @@ class TagContainer extends StatelessWidget {
 }
 
 /// A customized [ToggleButtons] that only contains two sub-widget.
-class FlatSwitchButton extends StatefulWidget{
+class FlatSwitchButton extends StatefulWidget {
   @required
   final Widget left;
   @required
@@ -95,15 +95,20 @@ class FlatSwitchButton extends StatefulWidget{
   final void Function(bool) onTap;
 
   /// A customized [ToggleButtons] that only contains two sub-widget.
-  FlatSwitchButton({Key key,  this.left, this.right, this.onTap, });
+  FlatSwitchButton({
+    Key key,
+    this.left,
+    this.right,
+    this.onTap,
+  });
 
   _FlatSwitchButtonState createState() => _FlatSwitchButtonState();
 }
 
-class _FlatSwitchButtonState extends State<FlatSwitchButton>{
+class _FlatSwitchButtonState extends State<FlatSwitchButton> {
   @override
   Widget build(BuildContext context) {
-    return  ToggleButtons(
+    return ToggleButtons(
       children: <Widget>[
         Container(child: widget.left, margin: const EdgeInsets.all(5.0)),
         Container(child: widget.right, margin: const EdgeInsets.all(5.0)),

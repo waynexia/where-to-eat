@@ -47,12 +47,11 @@ class PlaceDetail extends StatelessWidget {
             ),
           ),
           FlatSwitchButton(
-            left: Text("想吃...",textScaleFactor:1.2),
-            right: Text("不要...",textScaleFactor:1.2),
-            onTap: (bool isLeftSelected){
-              isSelectedTagsWanted = isLeftSelected;
-            }
-          )
+              left: Text("想吃...", textScaleFactor: 1.2),
+              right: Text("不要...", textScaleFactor: 1.2),
+              onTap: (bool isLeftSelected) {
+                isSelectedTagsWanted = isLeftSelected;
+              })
         ]),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

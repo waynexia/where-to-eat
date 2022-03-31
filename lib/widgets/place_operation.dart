@@ -27,7 +27,7 @@ class PlaceOperation extends StatelessWidget {
 
   onDeletePlace(context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    developer.log("Removing place "+place.title);
+    developer.log("Removing place " + place.title);
     await prefs.remove(place.title);
     Navigator.pop(context);
   }
